@@ -13,12 +13,11 @@ if __name__ == '__main__':
        elif line.startswith('S-') or line.startswith('T-') or line.startswith('P-'):
          continue
        elif line.startswith('H-'):
-         id = line.split('\t')[0].split('-')[1]
+         id = int(line.split('\t')[0].split('-')[1])
          sents[id] = line.split('\t')[2]
 
-  for i in range(len(sents)):
-    try:
-      sys.stdout.write(sents[str(i)])
-    except KeyError:
-      print("Error in", i)
-      continue
+  for i in range(max(sents.keys()) + 1):
+    if i in sents:
+      sys.stdout.write(sents[i])
+    else:
+      print("Error in {}".format(i))
