@@ -228,7 +228,7 @@ class TransformerEncoder(FairseqEncoder):
 
     def create_mask(self, lengths):
         max_len = max(lengths)
-        mask = lengths.new_zeros(len(lengths), max_len).byte()
+        mask = lengths.new_zeros(len(lengths), max_len).bool()
         for i, l in enumerate(lengths):
             mask[i, :max_len-l] = 1
         if not mask.any():
